@@ -48,3 +48,27 @@ variable "enable_purge_protection" {
   description = "Is Purge Protection enabled for this Key Vault?"
   default     = false
 }
+
+variable "object_id" {
+  type        = string
+  description = "AD user"
+  
+}
+
+variable "key_permissions" {
+  type        = list
+  description = "Secret permissions for keyvault"
+  default     = ["backup", "create", "delete", "get", "import", "list", "purge", "recover", "restore", "update",]
+}
+
+variable "secret_permissions" {
+  type        = list
+  description = "Secret permissions for keyvault"
+  default     = ["list",]
+}
+
+variable "certificate_permissions" {
+  type        = list
+  description = "Certificate permissions for keyvault"
+  default     = ["list",]
+}

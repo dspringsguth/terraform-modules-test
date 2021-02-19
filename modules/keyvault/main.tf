@@ -9,3 +9,12 @@ resource "azurerm_key_vault" "kv" {
   enabled_for_template_deployment = var.enabled_for_template_deployment
   purge_protection_enabled        = var.enable_purge_protection
 }
+
+resource "azurerm_key_vault_access_policy" "kvp" {
+  key_vault_id                    = azurerm_key_vault.kv.id
+  tenant_id                       = azurerm_key_vault.kv.tenant_id
+  object_id                       = var.object_id
+  key_permissions                 = var.key_permissions
+  secret_permissions              = var.secret_permissions
+  certificate_permissions         = var.certificate_permissions
+}
