@@ -51,7 +51,7 @@ variable "enable_purge_protection" {
 
 variable "object_id" {
   type        = string
-  description = "AD user"
+  description = "Object ID of the according Group/User/Service Principal"
   
 }
 
