@@ -11,18 +11,22 @@ provider "azurerm" {
   features {}
 }
 
-module "resourcegroup" {
-  source                      = "./modules/resourcegroup"
-  rg_name                     = "ds-rg-test-001"
+resource "azurerm_resource_group" "rg" {
+
+    name            =   var.rg_name
+    location        =   var.location
+    tags            =   var.tags  
+
 }
 
 module "keyvault" {
-  source                      = "./modules/keyvault"
-  rg_name                     = module.resourcegroup.resource_group_name
-  key_vault_name              = "ds-keyvault-test-001"
-  tenant_id                   = "1b7ebc65-8513-4491-aac7-a9ddebe4df1b"
-  key_vault_sku_pricing_tier  = "premium"
-  object_id                   = "f7b7ed91-af9c-481b-83a7-6cb43f3b0edd"
+  source                        = "./modules/keyvault"
+  rg_name                       = var.rg_name
+  key_vault_name                = "ds-keyvault-test-001"
+  tenant_id                     = "1b7ebc65-8513-4491-aac7-a9ddebe4df1b"
+  key_vault_sku_pricing_tier    = "premium"
+  object_id                     = "f7b7ed91-af9c-481b-83a7-6cb43f3b0edd"
+  depends_on                    = [azurerm_resource_group.rg]
 }
 
 # It probably doesn't make much sense to include role_defintion modules
@@ -39,3 +43,10 @@ module "keyvault" {
 #   source                      = "./modules/role_assignment"
 #   object_id                   = "f7b7ed91-af9c-481b-83a7-6cb43f3b0edd"
 # }     
+
+module "recovery_services_vault" {
+  source                        = "./modules/recovery_services_vault"
+  rg_name                       = var.rg_name
+  rsv_name                      = "ds-rsv-test-001"
+  depends_on                    = [azurerm_resource_group.rg]
+}

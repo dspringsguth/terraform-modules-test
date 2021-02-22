@@ -8,6 +8,7 @@ resource "azurerm_key_vault" "kv" {
   enabled_for_disk_encryption     = var.enabled_for_disk_encryption
   enabled_for_template_deployment = var.enabled_for_template_deployment
   purge_protection_enabled        = var.enable_purge_protection
+  tags                            = var.tags
 }
 
 resource "azurerm_key_vault_access_policy" "kvp" {

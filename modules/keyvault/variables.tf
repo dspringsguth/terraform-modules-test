@@ -72,3 +72,11 @@ variable "certificate_permissions" {
   description = "Certificate permissions for keyvault"
   default     = ["list",]
 }
+
+variable "tags" {
+  type                      = map
+  default                   = {
+      author = "danielspringsguth"
+  }
+  description               = "Tag for author"
+}
