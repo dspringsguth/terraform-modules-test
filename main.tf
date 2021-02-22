@@ -22,10 +22,10 @@ resource "azurerm_resource_group" "rg" {
 module "keyvault" {
   source                        = "./modules/keyvault"
   rg_name                       = var.rg_name
-  key_vault_name                = "ds-keyvault-test-001"
-  tenant_id                     = "1b7ebc65-8513-4491-aac7-a9ddebe4df1b"
+  key_vault_name                = "ds-kv-test-001"
+  tenant_id                     = var.tenant_id
   key_vault_sku_pricing_tier    = "premium"
-  object_id                     = "f7b7ed91-af9c-481b-83a7-6cb43f3b0edd"
+  object_id                     = var.object_id
   depends_on                    = [azurerm_resource_group.rg]
 }
 
@@ -41,7 +41,7 @@ module "keyvault" {
 module "role_assignment" {
   rg_name                       = var.rg_name
   source                        = "./modules/role_assignment"
-  object_id                     = "f7b7ed91-af9c-481b-83a7-6cb43f3b0edd"
+  object_id                     = var.object_id
   depends_on                    = [azurerm_resource_group.rg]
 }     
 

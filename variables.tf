@@ -16,3 +16,13 @@ variable "tags" {
   }
   description               = "Tag for author"
 }
+
+variable "object_id" {
+  type        = string
+  description = "Object ID of the according Group/User/Service Principal"
+}
+
+variable "tenant_id" {
+  type        = string
+  description = "The tenant ID of the current AD"
+}
