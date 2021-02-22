@@ -2,7 +2,7 @@
 data "azurerm_subscription" "primary" {}
   
 
-resource "azurerm_role_definition" "ra1" {
+resource "azurerm_role_definition" "rd1" {
     scope               = data.azurerm_subscription.primary.id
     name                = var.azurerm_role_definition
     permissions {
