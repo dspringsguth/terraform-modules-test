@@ -3,10 +3,10 @@ variable "rg_name" {
   description               = "Resource group name"
 }
 
-variable "rsv_name" {
+variable "sa_name" {
   type                      = string
-  description               = "Name of the recovery services vault" 
-}  
+  description               = "Storage account name"
+}
 
 variable "location" {
   type                      = string
@@ -16,15 +16,15 @@ variable "location" {
 
 variable "sku" {
   type                      = string
-  description               = "SKU of RSV - Standard or Premium"
+  description               = "SKU - Standard or Premium"
   default                   = "Standard"
 
 }
 
-variable "soft_delete_enabled" {
-  type                      = bool
-  description               = "Enable/Disable soft deletion"
-  default                   = true
+variable "account_replication_type" {
+  type                      = string
+  description               =   "Replication Type: LRS, GRS, RAGRS, ZRS, GZRS, RAGZRS"
+  default                   = "GRS"
 }
 
 variable "tags" {

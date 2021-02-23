@@ -26,3 +26,8 @@ variable "tenant_id" {
   type        = string
   description = "The tenant ID of the current AD"
 }
+
+variable "sa_name" {
+  type        = string
+  description = "Name of storage account"
+}

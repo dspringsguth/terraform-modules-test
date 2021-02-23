@@ -29,6 +29,13 @@ module "keyvault" {
   depends_on                    = [azurerm_resource_group.rg]
 }
 
+module "storage_account" {
+  source                        = "./modules/storage_account"
+  rg_name                       = var.rg_name
+  sa_name                       = var.sa_name
+  depends_on                    = [azurerm_resource_group.rg]
+}
+
 # It probably doesn't make much sense to include role_defintion modules
 # module "role_definition" {
 #   source                      = "./modules/role_definition"
@@ -37,7 +44,7 @@ module "keyvault" {
 #   object_id                   = "f7b7ed91-af9c-481b-83a7-6cb43f3b0edd"
 # }
 
-#  Since rg_name does not yet exist before terraform apply, this module has to be staged somehow
+
 module "role_assignment" {
   rg_name                       = var.rg_name
   source                        = "./modules/role_assignment"
@@ -50,4 +57,21 @@ module "recovery_services_vault" {
   rg_name                       = var.rg_name
   rsv_name                      = "ds-rsv-test-001"
   depends_on                    = [azurerm_resource_group.rg]
+}
+
+module "monitor_log_profile" {
+  source                        = "./modules/monitor_log_profile"
+  rg_name                       = var.rg_name
+  sa_name                       = var.sa_name
+  mlp_name                      = "ds-mlp-test-001"
+  depends_on                    = [azurerm_resource_group.rg]
+
+}
+
+module "monitor_diagnostic_setting" {
+  source                        = "./modules/monitor_diagnostic_setting"
+  mds_name                      = "ds-mds-test-001"
+  rg_name                       = var.rg_name
+  sa_name                       = var.sa_name
+  depends_on                    = [azurerm_resource_group.rg]  
 }
