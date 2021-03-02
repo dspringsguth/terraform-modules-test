@@ -23,6 +23,7 @@ module "keyvault" {
   source                        = "./modules/keyvault"
   rg_name                       = var.rg_name
   key_vault_name                = "ds-kv-test-001"
+  ip_rules                      = ["10.10.0.0/26",]
   tenant_id                     = var.tenant_id
   key_vault_sku_pricing_tier    = "premium"
   object_id                     = var.object_id
@@ -52,12 +53,12 @@ module "role_assignment" {
   depends_on                    = [azurerm_resource_group.rg]
 }     
 
-module "recovery_services_vault" {
-  source                        = "./modules/recovery_services_vault"
-  rg_name                       = var.rg_name
-  rsv_name                      = "ds-rsv-test-001"
-  depends_on                    = [azurerm_resource_group.rg]
-}
+# module "recovery_services_vault" {
+#   source                        = "./modules/recovery_services_vault"
+#   rg_name                       = var.rg_name
+#   rsv_name                      = "ds-rsv-test-001"
+#   depends_on                    = [azurerm_resource_group.rg]
+# }
 
 module "monitor_log_profile" {
   source                        = "./modules/monitor_log_profile"

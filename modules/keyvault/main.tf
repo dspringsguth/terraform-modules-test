@@ -9,6 +9,11 @@ resource "azurerm_key_vault" "kv" {
   enabled_for_template_deployment = var.enabled_for_template_deployment
   purge_protection_enabled        = var.enable_purge_protection
   tags                            = var.tags
+  network_acls {
+    default_action  = "Deny"
+    bypass          = var.bypass
+    ip_rules        = var.ip_rules
+  }
 }
 
 resource "azurerm_key_vault_access_policy" "kvp" {

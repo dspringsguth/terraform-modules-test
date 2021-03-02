@@ -16,7 +16,7 @@ variable "key_vault_location" {
 
 variable "tenant_id" {
   type        = string
-  description = "The tenant ID of the key vault"
+  description = "The tenant ID of the according Azure Active Directory"
 }
 
 variable "key_vault_sku_pricing_tier" {
@@ -47,6 +47,17 @@ variable "enable_purge_protection" {
   type        = bool
   description = "Is Purge Protection enabled for this Key Vault?"
   default     = false
+}
+
+variable "bypass" {
+  type        = string
+  description = "Specifies which traffic can bypass the network rules. Possible values are 'AzureServices' and 'None'."
+  default     = "AzureServices"
+}
+
+variable "ip_rules" {
+  type        = list
+  description = "One or more IP Adresses, or CIDR Blocks which should be able to access the Key Vault" 
 }
 
 variable "object_id" {
